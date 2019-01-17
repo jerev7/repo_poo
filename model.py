@@ -1,4 +1,5 @@
 # -*- coding: utf8 -*-
+import math
 import json
 
 class Agent:
@@ -12,9 +13,19 @@ class Agent:
 			setattr(self, attr_name, attr_value)
 
 class Position:
-	def __init__(self, longitude, latitude):
-		self.longitude = longitude
-		self.latitude = latitude
+	def __init__(self, longitude_degrees, latitude_degrees):
+		self.longitude_degrees = longitude_degrees
+		self.latitude_degrees = latitude_degrees
+
+	@property
+	def longitude(self):
+		return self.longitude_degrees * math.pi / 180
+
+	@property
+	def latitude(self):
+		return self.latitude_degrees * math.pi / 180
+	
+	
 
 def main():
 	for agent_attributes in json.load(open("agents-100k.json")):
